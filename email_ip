@@ -1,3 +1,10 @@
 #!/bin/bash
 
-curl icanhazip.com | xargs send_email.py "Routine Report"
+FILE=/var/local/myip.txt
+CURRENTIP=`curl icanhazip.com`
+SAVEDIP=`cat $FILE`
+
+if [[ $CURRENTIP != $SAVEDIP ]]; then
+    echo $CURRENTIP | xargs send_email.py "Routine Report"
+    echo $CURRENTIP > $FILE
+fi
