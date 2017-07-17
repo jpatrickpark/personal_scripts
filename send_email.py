@@ -22,9 +22,12 @@ def send_email(addr, title, content):
     if response.status_code != 202:
         print('failure')
 
-if __name__ == '__main__':
+def get_args():
     parser = argparse.ArgumentParser(description = 'Send email to self.')
     parser.add_argument('title')
     parser.add_argument('content')
-    args = parser.parse_args()
-    send_email_to_myself(args.title,args.content)
+    return parser.parse_args()
+
+if __name__ == '__main__':
+    args = get_args()
+    send_email_to_myself(args.title, args.content)
