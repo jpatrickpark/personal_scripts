@@ -1,3 +1,10 @@
 #!/bin/bash
 
-curl icanhazip.com
+FILE=/var/local/myip.txt
+CURRENTIP=`curl icanhazip.com`
+SAVEDIP=`cat $FILE`
+
+if [[ $CURRENTIP != $SAVEDIP ]]; then
+    echo $CURRENTIP | xargs send_email.py "Change Notification"
+    echo $CURRENTIP > $FILE
+fi
