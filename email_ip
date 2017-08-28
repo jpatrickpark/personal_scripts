@@ -1,6 +1,10 @@
 #!/bin/bash
 
 FILE=/var/local/myip.txt
+if ! [ -e $FILE ]; then
+    sudo touch /var/local/myip.txt
+    sudo chmod 777 /var/local/myip.txt 
+fi
 CURRENTIP=`curl ifconfig.co`
 SAVEDIP=`cat $FILE`
 
